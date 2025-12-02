@@ -1,0 +1,26 @@
+{
+  "name": "project-phase-1",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Darshan-Gowda-A/A-Simle_Fullstack_Project-Air-B-B-clone-#readme",
+  "bugs": {
+    "url": "https://github.com/Darshan-Gowda-A/A-Simle_Fullstack_Project-Air-B-B-clone-/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Darshan-Gowda-A/A-Simle_Fullstack_Project-Air-B-B-clone-.git"
+  },
+  "license": "ISC",
+  "author": "Darshan Gowda A",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^9.0.0"
+  }
+}
