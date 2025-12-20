@@ -48,18 +48,8 @@ passport.deserializeUser(User.deserializeUser());//removing user info after the 
 app.use((req,res,next)=>{
     res.locals.success=req.flash("success");/// -----control-flash
     res.locals.error=req.flash("error");/// -----control-flash
+    res.locals.currUser=req.user;
     next();
-})
-
-app.get("/demo",async(req,res)=>{
-     let register=new User({
-        email:"dar@123",
-        username:"darab"
-     });
-     let r=await User.register(register,"helloworld");
-    res.send(r);
-
-     
 })
 
 
