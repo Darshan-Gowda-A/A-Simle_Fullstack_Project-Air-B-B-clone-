@@ -9,8 +9,8 @@ const ListingSchema = new Schema({
     },
     description: String,
     image: {
-        type:String,
-        default:"https://media.istockphoto.com/id/140472118/photo/middle-finger.jpg?s=612x612&w=0&k=20&c=PHWkY3qathm5pjKIIJ5G2fggGxln0puxrdYlD6ly3Nc=",                   
+         url:String,
+         filename:String,   
     },
     price: Number,
     location: String,
