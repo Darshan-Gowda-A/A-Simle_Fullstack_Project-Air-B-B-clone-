@@ -34,16 +34,24 @@ app.use(methodOverride("_method"))
 app.engine("ejs", ejsMate)
 app.use(express.static(path.join(__dirname, "/public")));
 
-const store=MongoStore.create({
-  mongoUrl:dbURL,
-  crypto:{
-    secret:process.env.SECRET,
-  },
-  touchAfter:24*3600
-})
+let store;
+try {
+  store=MongoStore.create({
+    mongoUrl:dbURL,
+    touchAfter:24*3600
+  })
+} catch(err) {
+  console.log("Error creating MongoStore:", err.message);
+  console.log("Using default session store");
+  store = new session.MemoryStore();
+}
 
-store.on("error",()=>{
-    console.log("ERROR IN MONGO SESSION STORE",err)
+if(!dbURL){
+  console.log("WARNING: MONGO_URL not configured");
+}
+
+store.on("error",(err)=>{
+    console.log("ERROR IN MONGO SESSION STORE", err)
 })
 const sessionOption = {store, secret: process.env.SECRET, resave: false, saveUninitialized: true,
   cookie:{
@@ -116,10 +124,11 @@ app.all(/(.*)/, (req, res, next) => {
 
 
 app.use((err, req, res, next) => {
-
     let { statusCode = 500, message = "Somthing went worng" } = err;
     // res.status(statusCode).send(message)
-    res.status(statusCode).render("error", { err })
+    if (!res.headersSent) {
+        res.status(statusCode).render("error", { err })
+    }
 })
 
 

@@ -16,7 +16,7 @@ module.exports.showListing=async (req, res) => {
     const listing = await Listing.findById(id).populate({path:"reviews",populate:{path:"author"}}).populate("owner");
     if(!listing){
         req.flash("error","this listing does not exit");
-        res.redirect("/listing");
+        return res.redirect("/listing");
     }
     res.render("listings/show.ejs", { listing })
 }
@@ -38,7 +38,7 @@ module.exports.createListing=async (req, res) => {
 module.exports.editListing=async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findById(id);
-    req.flash("success"," listing edited")
+ 
     let originalUrl=listing.image.url;
    originalUrl=originalUrl.replace("/update","/update/h_300,w_250")
     res.render("listings/edit.ejs", { listing ,originalUrl })

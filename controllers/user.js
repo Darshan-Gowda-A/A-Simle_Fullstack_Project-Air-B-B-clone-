@@ -5,7 +5,7 @@ module.exports.renderSignupForm=(req, res) => {
     res.render("users/signup.ejs")
 }
 
-module.exports.userSignup=async (req, res) => {
+module.exports.userSignup=async (req, res, next) => {
     try {
         let { username, email, password } = req.body;
         const newUser = new User({ email, username });
@@ -30,7 +30,7 @@ module.exports.renderLoginForm= (req, res) => {
     res.render("users/login.ejs");
 }
 
-module.exports.userLogin= async (req, res) => {
+module.exports.userLogin= async (req, res, next) => {
     req.flash("success", "welcome back to WonderLust");
     let redirect = res.locals.redirectUrl || "/listing"
     res.redirect(redirect);
